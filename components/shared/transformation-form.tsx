@@ -141,10 +141,10 @@ export const TransformationForm = ({ action, data = null, userId, type, creditBa
                     ...prevState?.[type],
                     [fieldName === 'prompt' ? 'prompt' : 'to' ]: value 
                 }
-            }))
-            
-            return onChangeField(value)
-        }, 1000);  
+            }))  
+        }, 1000)();
+
+        return onChangeField(value)
     }
 
     const onTransformHandler = async () => {
@@ -212,7 +212,7 @@ export const TransformationForm = ({ action, data = null, userId, type, creditBa
                                 type === "remove" ? "Object to Remove" : "Object to Recolor"
                             }
                             className="w-full"
-                            render={(({ field }) => (
+                            render={({ field }) => (
                                 <Input 
                                     value={field.value}
                                     className="input-field"
@@ -223,7 +223,7 @@ export const TransformationForm = ({ action, data = null, userId, type, creditBa
                                         field.onChange
                                     )}
                                 />
-                            ))}
+                            )}
                         />
                         {type === 'recolor' && (
                             <CustomField 

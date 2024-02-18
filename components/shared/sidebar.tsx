@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator"
 
 
 const Sidebar = () => {
@@ -19,6 +20,7 @@ const Sidebar = () => {
                         Glipmse AI
                     </p>
                 </Link>
+                <Separator />
                 <nav className="sidebar-nav">
                     <SignedIn>
                         <ul className="sidbar-nav_elements">
@@ -39,12 +41,17 @@ const Sidebar = () => {
                                     </li>
                                 )
                             })}
+                            <Separator />
                         </ul>
+                       
                         <ul className="sidebar-nav_elements">
+                            <Separator />
                             {navLinks.slice(6).map((link) => {
                                 const isActive = link.route === pathname
                                 return (
+                                    
                                     <li key={link.route} className={`sidebar-nav_element group ${isActive ? "bg-purple-gradient text-white" : "text-gray-700"}`}>
+                                        
                                         <Link className="sidebar-link" href={link.route}>
                                             <Image 
                                                 src={link.icon}
@@ -56,11 +63,13 @@ const Sidebar = () => {
                                             {link.label}
                                         </Link>
                                     </li>
+                                    
                                 )
                             })}
                             <li className="flex-left cursor-pointer gap-2 p-4">
                                 <UserButton afterSignOutUrl="/" showName/>  
                             </li>
+                            
                         </ul>
                     </SignedIn>
                     <SignedOut>
