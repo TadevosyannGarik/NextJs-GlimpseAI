@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { CustomField } from "./custom-field"
 import MediaUploader from "./media-uploader"
+import TransformedImage from "./transformed-image"
+import { updateCredits } from "@/lib/actions/user.actions"
   
 
 export const formSchema = z.object({
@@ -88,7 +90,7 @@ export const TransformationForm = ({ action, data = null, userId, type, creditBa
         setNewTransformation(null)
     
         startTransition(async () => {
-            // await updateCredits(userId, creditFee)
+            await updateCredits(userId, -1)
         })
     }
     
@@ -186,6 +188,14 @@ export const TransformationForm = ({ action, data = null, userId, type, creditBa
                                 type={type}
                             />
                         )}
+                    />
+                    <TransformedImage 
+                        image={image}
+                        type={type}
+                        title={form.getValues().title}
+                        isTransforming={isTransforming}
+                        setIsTransforming={setIsTransforming}
+                        transformationConfig={transformationConfig}
                     />
                 </div>
                 <div className="flex flex-col gap-4">
